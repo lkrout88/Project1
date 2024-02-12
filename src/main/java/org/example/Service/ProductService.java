@@ -90,29 +90,40 @@ public class ProductService {
         Product productToDelete = getProductById(productId);
 
         if (productToDelete != null) {
-             productList.remove(productToDelete);
-        }return productToDelete;
+            productList.remove(productToDelete);
+        }
+        return productToDelete;
 
     }
 
-    //public Product updateProduct(long productId, String newProductName, int newPrice, String newSellerName){
+    //Method will update the product values when the client does a put
     public Product updateProduct(long id, Product updatedProduct) {
+        boolean sellerExists;
+
         Product productToUpdate = getProductById(id);
 
-        if (productToUpdate != null){
+        if (productToUpdate != null) {
+            try {
+                if (checkSellerNameExists(updatedProduct)) {
+                    productToUpdate.setProductName(updatedProduct.getProductName());
+                    productToUpdate.setProductPrice(updatedProduct.getProductPrice());
+                    productToUpdate.setSellerName(updatedProduct.getSellerName());
+                    //keep product ID the same
+                   // productToUpdate.setProductId(id);
+                } else {
 
-            productToUpdate.setProductName(updatedProduct.getProductName());
-            productToUpdate.setProductPrice(updatedProduct.getProductPrice());
+                    return null;
+                }
+            } catch (Exception e) {
+                return null;
+            }
+            return productToUpdate;
+        }
+        return null;
 
-
-
-
-
-        }return productToUpdate;
     }
 
-}
-
+    }
 
 
 

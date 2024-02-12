@@ -48,6 +48,7 @@ public class ProductController {
         api.post("/seller/", ProductController::postSellerHandler);
         api.get("/product/{productId}", ProductController::getProductByIdHandler);
         api.delete("/product/{productId}", ProductController::deleteProductByIdHandler);
+        api.put("/product/{productId}", ProductController::updateProductByIdHandler);
         return api;
 
     }
@@ -156,8 +157,8 @@ public class ProductController {
             ObjectMapper om = new ObjectMapper();
             Product productToUpdate = om.readValue(context.body(), Product.class);
             //long id = Long.parseLong(context.pathParam("productId"));
-            Product updateProduct = productService.updateProduct(id, productToUpdate);
-            if (productToUpdate == null) {
+            Product updatedProduct = productService.updateProduct(id, productToUpdate);
+            if (updatedProduct == null) {
                 context.status(404);
                 context.result("Product not found");
             } else {
