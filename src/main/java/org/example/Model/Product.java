@@ -1,11 +1,12 @@
 package org.example.Model;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Product {
     public long productId;
     public String productName;
-    public int productPrice;
+    public double productPrice;
     public String sellerName;
 
 
@@ -13,7 +14,7 @@ public class Product {
 
     }
 
-    public Product(long productId, String productName, int productPrice, String sellerName){
+    public Product(long productId, String productName, double productPrice, String sellerName){
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -36,11 +37,14 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(double productPrice) {
+       // DecimalFormat df = new DecimalFormat("#.00);");
+       // String formattedPrice = df.format(productPrice);
+       // this.productPrice =Double.parseDouble(formattedPrice);
         this.productPrice = productPrice;
     }
 

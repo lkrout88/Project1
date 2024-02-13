@@ -2,6 +2,7 @@ package org.example.Service;
 
 import org.example.Controller.ProductController;
 import org.example.Exception.ProductException;
+import org.example.Main;
 import org.example.Model.Product;
 import org.example.Model.Seller;
 
@@ -12,6 +13,12 @@ import java.util.List;
 
 
 public class ProductService {
+   /*
+    Create a constructor that takes in (injects) the seller service into the product service and
+    then the this assigns the sellerService to this instance of the Product Service
+
+   */
+
     public ProductService(SellerService sellerService) {
         this.sellerService = sellerService;
 
@@ -37,7 +44,7 @@ public class ProductService {
         }
         // sellerService = new SellerService();
         List<Seller> sellerList = sellerService.getSellerList();
-        System.out.println("seller list" + sellerList.size());
+        //System.out.println("seller list" + sellerList.size());
         for (int i = 0; i < sellerList.size(); i++) {
             if (p.sellerName.equals(sellerList.get(i).getSellerName())) {
                 /*long id = (long) (Math.random() * Long.MAX_VALUE);
@@ -53,6 +60,7 @@ public class ProductService {
 
     //this method will check the value (true or false returned from the checkSellerNameExists method before adding the product
     public Product insertProduct(Product p) throws ProductException {
+        Main.log.info("ADD: Attempting to add a Product:");
         boolean sellerExists = checkSellerNameExists(p);
         // 201 - resource created
         // List<Product> productList = new ArrayList<>();
@@ -61,10 +69,11 @@ public class ProductService {
             long id = (long) (Math.random() * Long.MAX_VALUE);
             p.setProductId(id);
             productList.add(p);
-            System.out.println("" + productList.size());
+            //System.out.println("" + productList.size());
             //if productService returns false then do the rest
 
         } else {
+            Main.log.warn("ADD: Seller does not exist" + p.getSellerName());
             throw new ProductException("SellerName must exist in Seller database");
         }
         return p;
@@ -96,7 +105,8 @@ public class ProductService {
 
     }
 
-    //Method will update the product values when the client does a put
+    //Method will update the product values when the client does a put.  This method will call other methods
+    //to check if
     public Product updateProduct(long id, Product updatedProduct) {
         boolean sellerExists;
 
