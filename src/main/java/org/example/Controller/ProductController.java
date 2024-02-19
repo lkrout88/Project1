@@ -92,7 +92,7 @@ public class ProductController {
 
     public static void getAllSellersHandler(Context context) {
 
-        List<Seller> sellerList = sellerService.getSellerList();
+        List<Seller> sellerList = sellerService.getAllSeller();
         context.json(sellerList);
     }
 

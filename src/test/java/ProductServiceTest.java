@@ -56,10 +56,8 @@ public class ProductServiceTest {
        //try {
            sellerService.insertSeller(seller);
       // } catch (Exception e){
-
           // throw new ProductException("Seller Name already exists");
         //}
-
         //try{
             productService.insertProduct(product);
        // }catch (Exception e) {

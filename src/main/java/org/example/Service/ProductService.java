@@ -1,13 +1,12 @@
 package org.example.Service;
 
-import org.example.Controller.ProductController;
+import DAO.ProductDAO;
+import DAO.SellerDAO;
 import org.example.Exception.ProductException;
 import org.example.Main;
 import org.example.Model.Product;
 import org.example.Model.Seller;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -18,13 +17,23 @@ public class ProductService {
     then the this assigns the sellerService to this instance of the Product Service
 
    */
+   SellerDAO sellerDAO;
+   ProductDAO productDAO;
+
+   public ProductService(SellerDAO sellerDAO, ProductDAO productDAO){
+       this.sellerDAO = sellerDAO;
+       this.productDAO = productDAO;
+   }
+
+   /*
+   old service before adding productDAO
 
     public ProductService(SellerService sellerService) {
         this.sellerService = sellerService;
 
         productList = new ArrayList<>();
     }
-
+    */
     // dependency injector add seller service into this product service
 
     SellerService sellerService;
@@ -33,6 +42,8 @@ public class ProductService {
 
 
     public List<Product> getAllProducts() {
+        List<Product> productList = productDAO.getAllProducts();
+        //System.out.println(productList);
         return productList;
     }
 
@@ -43,10 +54,11 @@ public class ProductService {
             throw new ProductException("Product Name and Seller Name cannot be blank an Product Price must be > 0");
         }
         // sellerService = new SellerService();
-        List<Seller> sellerList = sellerService.getSellerList();
+        //List<Seller> sellerList = sellerService.getAllSeller();
+        List<Seller> existingSeller = sellerDAO.getAllSellers();
         //System.out.println("seller list" + sellerList.size());
-        for (int i = 0; i < sellerList.size(); i++) {
-            if (p.sellerName.equals(sellerList.get(i).getSellerName())) {
+        for (int i = 0; i < existingSeller.size(); i++) {
+            if (p.sellerName.equals(existingSeller.get(i).getSellerName())) {
                 /*long id = (long) (Math.random() * Long.MAX_VALUE);
                 p.setProductId(id);
                 productList.add(p);
@@ -62,13 +74,15 @@ public class ProductService {
     public Product insertProduct(Product p) throws ProductException {
         Main.log.info("ADD: Attempting to add a Product:");
         boolean sellerExists = checkSellerNameExists(p);
+        //System.out.println(sellerExists);
         // 201 - resource created
         // List<Product> productList = new ArrayList<>();
         if (sellerExists) {
 
             long id = (long) (Math.random() * Long.MAX_VALUE);
             p.setProductId(id);
-            productList.add(p);
+            productDAO.insertProduct(p);
+            //System.out.println(p.sellerName);
             //System.out.println("" + productList.size());
             //if productService returns false then do the rest
 
@@ -77,13 +91,15 @@ public class ProductService {
             throw new ProductException("SellerName must exist in Seller database");
         }
         return p;
+
     }
 
     //method below returns the product details when a product id is entered by the client
     public Product getProductById(long id) {
         // long ids= Long.parseLong(String.valueOf((id)));
-        for (int i = 0; i < productList.size(); i++) {
-            Product currentProduct = productList.get(i);
+        List<Product> existingProducts = productDAO.getAllProducts();
+        for (int i = 0; i < existingProducts.size(); i++) {
+            Product currentProduct = existingProducts.get(i);
             if (currentProduct.getProductId() == id) {
 
                 //System.out.println("current product" + currentProduct);
@@ -94,16 +110,19 @@ public class ProductService {
         return null;
     }
 
+
     public Product deleteProduct(long productId) {
 
         Product productToDelete = getProductById(productId);
 
         if (productToDelete != null) {
-            productList.remove(productToDelete);
+            productDAO.deleteProduct(productToDelete);
         }
         return productToDelete;
 
     }
+
+
 
     //Method will update the product values when the client does a put.  This method will call other methods
     //to check if
@@ -116,10 +135,12 @@ public class ProductService {
             try {
                 if (checkSellerNameExists(updatedProduct)) {
                     productToUpdate.setProductName(updatedProduct.getProductName());
-                    productToUpdate.setProductPrice(updatedProduct.getProductPrice());
+                   productToUpdate.setProductPrice(updatedProduct.getProductPrice());
                     productToUpdate.setSellerName(updatedProduct.getSellerName());
+                   // productToUpdate.setProductId(updatedProduct.getProductId());
                     //keep product ID the same
                    // productToUpdate.setProductId(id);
+                    //productDAO.updateProduct(updatedProduct);
                 } else {
 
                     return null;
