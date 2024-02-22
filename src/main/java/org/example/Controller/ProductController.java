@@ -152,7 +152,9 @@ public class ProductController {
     }
 
     public static void updateProductByIdHandler(Context context) {
+        //System.out.println(context.pathParam("productId"));
         long id = Long.parseLong(context.pathParam("productId"));
+
         try {
             ObjectMapper om = new ObjectMapper();
             Product productToUpdate = om.readValue(context.body(), Product.class);

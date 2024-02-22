@@ -130,6 +130,7 @@ public class ProductService {
         boolean sellerExists;
 
         Product productToUpdate = getProductById(id);
+        System.out.println(productToUpdate.productId);
 
         if (productToUpdate != null) {
             try {
@@ -137,10 +138,13 @@ public class ProductService {
                     productToUpdate.setProductName(updatedProduct.getProductName());
                    productToUpdate.setProductPrice(updatedProduct.getProductPrice());
                     productToUpdate.setSellerName(updatedProduct.getSellerName());
-                   // productToUpdate.setProductId(updatedProduct.getProductId());
+                   productToUpdate.setProductId(id);
+
                     //keep product ID the same
-                   // productToUpdate.setProductId(id);
-                    //productDAO.updateProduct(updatedProduct);
+                    //productToUpdate.setProductId(id);
+
+                    productDAO.updateProduct(productToUpdate);
+
                 } else {
 
                     return null;

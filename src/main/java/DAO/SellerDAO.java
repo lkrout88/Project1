@@ -25,7 +25,7 @@ public class SellerDAO {
                 String sellerName = resultSet.getString("name");
                 Seller s = new Seller(sellerName);
                 sellerResults.add(s);
-                System.out.println(sellerResults);
+                //System.out.println(sellerResults);
             }
         }catch (SQLException e){
             e.printStackTrace();

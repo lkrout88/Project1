@@ -78,15 +78,16 @@ public class ProductDAO {
         }
     }
 
-   /* public void updateProduct(Product updatedProduct){
+
+    public void updateProduct(Product updatedProduct){
         try{
             PreparedStatement ps = conn.prepareStatement("UPDATE PRODUCT SET productName = ?, productPrice = ?, sellerName = ? WHERE productId = ?");
 
             ps.setString(1, updatedProduct.getProductName());
             ps.setDouble(2, updatedProduct.getProductPrice());
             ps.setString(3, updatedProduct.getSellerName());
-            //ps.setLong(4, updatedProduct.getProductId());
-            System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getProductPrice() + " " + updatedProduct.getSellerName());
+            ps.setLong(4, updatedProduct.getProductId());
+            System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getProductPrice() + " " + updatedProduct.getSellerName() +" "+ updatedProduct.getProductId());
             ps.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -94,5 +95,7 @@ public class ProductDAO {
     }
 
 
-    */
+
+
+
 }
