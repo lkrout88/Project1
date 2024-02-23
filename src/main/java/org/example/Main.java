@@ -23,9 +23,10 @@ public class Main {
         //SellerService sellerService = new SellerService();
         Connection conn = ConnectionSingleton.getConnection();
         SellerDAO sellerDAO = new SellerDAO(conn);
+        SellerService sellerService = new SellerService(sellerDAO);
         ProductService productService = null;
         ProductDAO productDAO = new ProductDAO(conn, productService);
-        SellerService sellerService = new SellerService(sellerDAO);
+        //SellerService sellerService = new SellerService(sellerDAO);
         productService = new ProductService(sellerDAO, productDAO);
         ProductController productController = new ProductController(productService, sellerService);
 

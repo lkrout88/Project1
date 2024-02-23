@@ -1,6 +1,7 @@
 package DAO;
 
 import org.example.Model.Seller;
+import org.example.Service.SellerService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +12,11 @@ import java.util.List;
 
 public class SellerDAO {
     Connection conn;
+    SellerService sellerService;
 
     public SellerDAO (Connection conn){
         this.conn = conn;
+
     }
 
     public List<Seller> getAllSellers(){
