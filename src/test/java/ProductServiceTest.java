@@ -31,7 +31,7 @@ public class ProductServiceTest {
     public void setup() {
         //these are activities done before running any tests.  Instantiate all objects and initialize all variables needed for the test here
         sellerService = new SellerService(sellerDAO);
-        productService = new ProductService(sellerDAO, productDAO);
+        //productService = new ProductService(productDAO);
         productDAO = new ProductDAO(conn, productService);
         sellerDAO = new SellerDAO(conn);
 
@@ -65,11 +65,12 @@ public class ProductServiceTest {
         String testSellerName2 = "bbb";
         Product product = new Product();
         product.setProductName(testProductName);
-        product.setSellerName(testSellerName);
+        product.setSellerName(testSellerName2);
         product.setProductPrice(testProductPrice);
         //Seller.seller
         Seller seller = new Seller();
-        seller.setSellerName(testSellerName2);
+        seller.setSellerName(testSellerName);
+
 
        //try {
            sellerDAO.insertSeller(seller);
@@ -79,8 +80,10 @@ public class ProductServiceTest {
         //}
         //try{
             productDAO.insertProduct(product);
+
        // }catch (Exception e) {
             //Assert.fail("SellerName must exist in Seller database");
+
         //}
             assertTrue(productDAO.getAllProducts().contains(product));
         }
@@ -107,7 +110,7 @@ public class ProductServiceTest {
         //}
 
         try{
-        productDAO.insertProduct(product);
+        productService.insertProduct(product);
             Assert.fail("SellerName must exist in Seller database");
          }catch (Exception e) {
 
