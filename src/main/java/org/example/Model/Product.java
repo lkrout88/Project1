@@ -21,7 +21,7 @@ public class Product {
         this.sellerName = sellerName;
     }
 
-    public long getProductId() {
+    public int getProductId() {
         return productId;
     }
 
