@@ -64,7 +64,7 @@ import java.sql.SQLException;
             }else {
 //            otherwise, recreate the tables without setting up a new connection
                 try {
-                    FileReader sqlReader = new FileReader("src/main/resources/Tables.sql");
+                    FileReader sqlReader = new FileReader("C:/Users/A239267/untitled/Project1/src/main/resources/Tables.sql");
                     RunScript.execute(connection, sqlReader);
                 } catch (SQLException | FileNotFoundException e) {
                     e.printStackTrace();

@@ -48,7 +48,7 @@ public class ProductDAO {
             PreparedStatement ps = conn.prepareStatement("select * from PRODUCT");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                long productId = rs.getLong("productId");
+                int productId = rs.getInt("productId");
                 String productName = rs.getString("productName");
                 int productPrice = rs.getInt("productPrice");
                 String sellerName = rs.getString("sellerName");

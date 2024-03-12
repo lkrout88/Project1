@@ -132,7 +132,7 @@ public class ProductController {
     }
 
     public static void getProductByIdHandler(Context context) {
-        long id = Long.parseLong(context.pathParam("productId"));
+        int id = Integer.parseInt(context.pathParam("productId"));
         //long ids= Long.parseLong(String.valueOf((id)));
 
         //ObjectMapper om = new ObjectMapper();
@@ -149,7 +149,7 @@ public class ProductController {
     }
 
     public static void deleteProductByIdHandler(Context context) {
-        long id = Long.parseLong(context.pathParam("productId"));
+        int id = Integer.parseInt(context.pathParam("productId"));
         //long ids= Long.parseLong(String.valueOf((id)));
 
         //ObjectMapper om = new ObjectMapper();
@@ -167,7 +167,7 @@ public class ProductController {
 
     public static void updateProductByIdHandler(Context context) {
         //System.out.println(context.pathParam("productId"));
-        long id = Long.parseLong(context.pathParam("productId"));
+        int id = Integer.parseInt(context.pathParam("productId"));
 
         try {
             ObjectMapper om = new ObjectMapper();

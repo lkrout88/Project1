@@ -80,7 +80,7 @@ public class ProductService {
         if (sellerExists) {
 
 
-            long id = (long) (Math.random() * Long.MAX_VALUE);
+            int id = (int) (Math.random() * Integer.MAX_VALUE);
             p.setProductId(id);
             productDAO.insertProduct(p);
             //System.out.println(p.sellerName);
@@ -96,7 +96,7 @@ public class ProductService {
     }
 
     //method below returns the product details when a product id is entered by the client
-    public Product getProductById(long id) {
+    public Product getProductById(int id) {
         // long ids= Long.parseLong(String.valueOf((id)));
         List<Product> existingProducts = productDAO.getAllProducts();
         for (int i = 0; i < existingProducts.size(); i++) {
@@ -112,7 +112,7 @@ public class ProductService {
     }
 
 
-    public Product deleteProduct(long productId) {
+    public Product deleteProduct(int productId) {
 
         Product productToDelete = getProductById(productId);
 
@@ -127,7 +127,7 @@ public class ProductService {
 
     //Method will update the product values when the client does a put.  This method will call other methods
     //to check if
-    public Product updateProduct(long id, Product updatedProduct) {
+    public Product updateProduct(int id, Product updatedProduct) {
         boolean sellerExists;
 
         Product productToUpdate = getProductById(id);

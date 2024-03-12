@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Product {
-    public long productId;
+    public int productId;
     public String productName;
     public double productPrice;
     public String sellerName;
@@ -14,7 +14,7 @@ public class Product {
 
     }
 
-    public Product(long productId, String productName, double productPrice, String sellerName){
+    public Product(int productId, String productName, double productPrice, String sellerName){
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -25,7 +25,7 @@ public class Product {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
