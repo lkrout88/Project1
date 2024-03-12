@@ -79,6 +79,7 @@ public class ProductService {
         // List<Product> productList = new ArrayList<>();
         if (sellerExists) {
 
+
             long id = (long) (Math.random() * Long.MAX_VALUE);
             p.setProductId(id);
             productDAO.insertProduct(p);
