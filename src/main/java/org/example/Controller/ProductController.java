@@ -74,12 +74,6 @@ public class ProductController {
     }
 
     public static void postProductHandler(Context context) {
-        //ObjectMapper om = new ObjectMapper();
-
-        // try {
-        // Product p = om.readValue(context.body(), Product.class);
-        // productService.insertProduct(p);
-        // context.status(201);
         try {
             ObjectMapper om = new ObjectMapper();
             Product p = om.readValue(context.body(), Product.class);
@@ -90,17 +84,6 @@ public class ProductController {
             context.result(e.getMessage());
             context.status(400);
         }
-        //context.json(p);
-
-//                context.json(p);
-
-        // } catch (JsonProcessingException e) {
-        //    Jackson was unable to parse the JSON, probably due to user error, so 400
-        //   context.status(400);
-        // } catch (ProductException e) {
-        // context.result(e.getMessage());
-        //  context.status(400);
-        // }
 
     }
 
@@ -114,9 +97,10 @@ public class ProductController {
         ObjectMapper om = new ObjectMapper();
         try {
             Seller s = om.readValue(context.body(), Seller.class);
-            sellerService.insertSeller(s);
+            Seller newSeller = sellerService.insertSeller(s);
             // 201 - resource created
             context.status(201);
+            context.json(newSeller);
         } catch (JsonProcessingException f) {
             //    Jackson was unable to parse the JSON, probably due to user error, so 400
             context.status(400);

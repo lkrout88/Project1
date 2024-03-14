@@ -29,7 +29,7 @@ public class SellerService {
      //   return sellerList;
    // }
 
-    public void insertSeller (Seller seller) throws ProductException {
+    public Seller insertSeller (Seller seller) throws ProductException {
         //List<Seller> sellerList;
         Main.log.info("ADD:  Attempting to add a Seller:" + seller.sellerName);
         List<Seller> existingSeller = getAllSeller();
@@ -45,5 +45,6 @@ public class SellerService {
        // do I need this line?  isn't the DAO adding it?
         //sellerList.add(seller);
         sellerDAO.insertSeller(seller);
+        return seller;
     }
 }

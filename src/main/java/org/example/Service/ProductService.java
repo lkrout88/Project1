@@ -50,7 +50,7 @@ public class ProductService {
     //Below method will return true- if the seller is already in the database-
     public boolean checkSellerNameExists(Product p)
             throws ProductException {
-        if (p.getProductName() == null || p.getSellerName() == null || p.getProductPrice() == 0) {
+        if (p.getProductName() == null || p.getSellerName() == null || p.getProductPrice() <= 0) {
             throw new ProductException("Product Name and Seller Name cannot be blank an Product Price must be > 0");
         }
         // sellerService = new SellerService();
